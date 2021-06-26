@@ -1,7 +1,12 @@
-FROM alpine
+# Failing with newer version
+FROM alpine:3.10
+
+WORKDIR /opt
 
 RUN apk add --no-cache avahi augeas
 
-ADD entrypoint.sh /opt/entrypoint.sh
+COPY entrypoint.sh ./entrypoint.sh
 
-ENTRYPOINT ["/opt/entrypoint.sh"]
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
